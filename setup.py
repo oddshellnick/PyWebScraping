@@ -31,7 +31,7 @@ def get_description() -> str:
 
 setup(
 		name="PyWebScraping",
-		version="1.3.12",
+		version="1.3.13",
 		author="oddshellnick",
 		author_email="oddshellnick.programming@gmail.com",
 		description=get_description(),
