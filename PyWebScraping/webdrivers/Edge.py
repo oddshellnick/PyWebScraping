@@ -88,23 +88,21 @@ class EdgeStartArgs(BrowserStartArgs):
 
     Attributes:
         start_command (str): The assembled start command.
-        browser_file_name (str): Path to the browser executable.
+        browser_exe (str): Path to the browser executable.
         debugging_port_command_line (str): Command-line argument for the debugging port.
-        webdriver_dir_command_line (str): Command-line argument for the webdriver directory.
+        profile_dir_command_line (str): Command-line argument for the webdriver directory.
         headless_mode_command_line (str): Command-line argument for headless mode.
         mute_audio_command_line (str): Command-line argument for muting audio.
         debugging_port (typing.Optional[int]): The debugging port number. Defaults to None.
         webdriver_dir (typing.Optional[str]): The webdriver directory. Defaults to None.
         headless_mode (bool): Whether to run in headless mode. Defaults to False.
         mute_audio (bool): Whether to mute audio. Defaults to False.
-
-    :Usage:
-        start_args = EdgeStartArgs(webdriver_dir="/path/to/webdriver", debugging_port=9222, headless_mode=True, mute_audio=True)
     """
 	
 	def __init__(
 			self,
-			webdriver_dir: typing.Optional[str] = None,
+			browser_exe: str = "msedge.exe",
+			profile_dir: typing.Optional[str] = None,
 			debugging_port: typing.Optional[int] = None,
 			headless_mode: bool = False,
 			mute_audio: bool = False,
@@ -113,21 +111,19 @@ class EdgeStartArgs(BrowserStartArgs):
         Initializes EdgeStartArgs.
 
         Args:
-            webdriver_dir (typing.Optional[str]): Directory of the webdriver executable. Defaults to None.
-            debugging_port (typing.Optional[int]): Port for remote debugging. Defaults to None.
-            headless_mode (bool): Run Edge in headless mode. Defaults to False.
-            mute_audio (bool): Mute audio in Edge. Defaults to False.
-
-        :Usage:
-            start_args = EdgeStartArgs(webdriver_dir="/path/to/webdriver", debugging_port=9222)
+        	browser_exe (str): The name of the Yandex Browser executable. Defaults to "msedge.exe".
+        	profile_dir (typing.Optional[str]): Directory for profile storing. Defaults to None.
+        	debugging_port (typing.Optional[int]): Port for remote debugging. Defaults to None.
+        	headless_mode (bool): Run Yandex in headless mode. Defaults to False.
+        	mute_audio (bool): Mute audio in Yandex. Defaults to False.
         """
 		super().__init__(
-				"msedge.exe",
+				browser_exe,
 				"--remote-debugging-port=%d",
 				'--user-data-dir="%s"',
 				"--headless=new",
 				"--mute-audio",
-				webdriver_dir,
+				profile_dir,
 				debugging_port,
 				headless_mode,
 				mute_audio,

@@ -489,9 +489,9 @@ class BrowserStartArgs:
 
     Attributes:
         start_command (str): The assembled start command.
-        browser_file_name (str): Path to the browser executable.
+        browser_exe (str): Path to the browser executable.
         debugging_port_command_line (str): Command-line argument for the debugging port.
-        webdriver_dir_command_line (str): Command-line argument for the webdriver directory.
+        profile_dir_command_line (str): Command-line argument for the webdriver directory.
         headless_mode_command_line (str): Command-line argument for headless mode.
         mute_audio_command_line (str): Command-line argument for muting audio.
         debugging_port (int): The debugging port number. Defaults to None.
@@ -513,9 +513,9 @@ class BrowserStartArgs:
 	
 	def __init__(
 			self,
-			browser_file_name: str,
+			browser_exe: str,
 			debugging_port_command_line: str,
-			webdriver_dir_command_line: str,
+			profile_dir_command_line: str,
 			headless_mode_command_line: str,
 			mute_audio_command_line: str,
 			webdriver_dir: typing.Optional[str] = None,
@@ -527,9 +527,9 @@ class BrowserStartArgs:
         Initializes BrowserStartArgs with browser settings.
 
         Args:
-            browser_file_name (str): Path to the browser executable.
+            browser_exe (str): Path to the browser executable.
             debugging_port_command_line (str): Command-line argument for the debugging port.
-            webdriver_dir_command_line (str): Command-line argument for the webdriver directory.
+            profile_dir_command_line (str): Command-line argument for the profile directory.
             headless_mode_command_line (str): Command-line argument for headless mode.
             mute_audio_command_line (str): Command-line argument for muting audio.
             webdriver_dir (typing.Optional[str]): The webdriver directory. Defaults to None.
@@ -537,9 +537,9 @@ class BrowserStartArgs:
             headless_mode (bool): Whether to run in headless mode. Defaults to False.
             mute_audio (bool): Whether to mute audio. Defaults to False.
         """
-		self.browser_file_name = browser_file_name
+		self.browser_exe = browser_exe
 		self.debugging_port_command_line = debugging_port_command_line
-		self.webdriver_dir_command_line = webdriver_dir_command_line
+		self.profile_dir_command_line = profile_dir_command_line
 		self.headless_mode_command_line = headless_mode_command_line
 		self.mute_audio_command_line = mute_audio_command_line
 		self.debugging_port = debugging_port
@@ -553,13 +553,13 @@ class BrowserStartArgs:
 		"""
         Assembles the browser start command based on the current settings.
         """
-		start_args = [self.browser_file_name]
+		start_args = [self.browser_exe]
 		
 		if self.debugging_port is not None:
 			start_args.append(self.debugging_port_command_line % self.debugging_port)
 		
 		if self.webdriver_dir is not None:
-			start_args.append(self.webdriver_dir_command_line % self.webdriver_dir)
+			start_args.append(self.profile_dir_command_line % self.webdriver_dir)
 		
 		if self.headless_mode:
 			start_args.append(self.headless_mode_command_line)
