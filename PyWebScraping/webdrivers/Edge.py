@@ -147,20 +147,15 @@ class EdgeWebDriver(BrowserWebDriver):
         webdriver_start_args (EdgeStartArgs): Manages browser start-up arguments.
         webdriver_options_manager (EdgeOptionsManager): Manages browser options.
         debugging_port (typing.Optional[int]): The debugging port number. Defaults to None.
-        webdriver_dir (typing.Optional[str]): The webdriver directory.  Defaults to None.
+        webdriver_dir (typing.Optional[str]): The webdriver directory. Defaults to None.
         headless_mode (bool): Whether to run in headless mode. Defaults to False.
         mute_audio (bool): Whether to mute audio. Defaults to False.
         user_agent (typing.Optional[list[str]]): The user agent. Defaults to None.
-        proxy (typing.Optional[typing.Union[str, list[str]]]) : The proxy server(s). Defaults to None.
-        window_rect (WindowRect):  The browser window rectangle.
-        webdriver_is_active (bool):  Indicates if the webdriver is currently active.
-        webdriver_service (Service | None): The webdriver service. Defaults to None.
-        webdriver_options (Options | None): The webdriver options. Defaults to None.
-
-    :Usage:
-        webdriver = EdgeWebDriver(webdriver_path="/path/to/msedgedriver")
-        webdriver.create_driver()
-        webdriver.driver.get("https://www.example.com")
+        proxy (typing.Optional[typing.Union[str, list[str]]]): The proxy server(s). Defaults to None.
+        window_rect (WindowRect): The browser window rectangle.
+        webdriver_is_active (bool): Indicates if the webdriver is currently active.
+        webdriver_service (typing.Optional[Service]): The webdriver service. Defaults to None.
+        webdriver_options (typing.Optional[Options]): The webdriver options. Defaults to None.
     """
 	
 	def __init__(
@@ -182,9 +177,6 @@ class EdgeWebDriver(BrowserWebDriver):
             implicitly_wait (int): Implicit wait time in seconds. Defaults to 5.
             page_load_timeout (int): Page load timeout in seconds. Defaults to 5.
             window_rect (WindowRect): Window rectangle for setting window position and size. Defaults to WindowRect().
-
-        :Usage:
-            webdriver = EdgeWebDriver(webdriver_path="/path/to/msedgedriver")
         """
 		super().__init__(
 				"msedge.exe",
@@ -270,7 +262,7 @@ class EdgeRemoteWebDriver(EmptyWebDriver):
         Args:
             command_executor (str): The address of the remote webdriver server.
             session_id (str): The session ID of the existing webdriver session.
-            webdriver_options_manager (EdgeOptionsManager):  An instance of EdgeOptionsManager for customizing browser options. Defaults to EdgeOptionsManager().
+            webdriver_options_manager (EdgeOptionsManager): An instance of EdgeOptionsManager for customizing browser options. Defaults to EdgeOptionsManager().
             implicitly_wait (int): The implicit wait timeout in seconds. Defaults to 5.
             page_load_timeout (int): The page load timeout in seconds. Defaults to 5.
 
