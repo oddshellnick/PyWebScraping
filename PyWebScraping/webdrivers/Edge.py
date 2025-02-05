@@ -88,23 +88,21 @@ class EdgeStartArgs(BrowserStartArgs):
 
     Attributes:
         start_command (str): The assembled start command.
-        browser_file_name (str): Path to the browser executable.
+        browser_exe (str): Path to the browser executable.
         debugging_port_command_line (str): Command-line argument for the debugging port.
-        webdriver_dir_command_line (str): Command-line argument for the webdriver directory.
+        profile_dir_command_line (str): Command-line argument for the webdriver directory.
         headless_mode_command_line (str): Command-line argument for headless mode.
         mute_audio_command_line (str): Command-line argument for muting audio.
         debugging_port (typing.Optional[int]): The debugging port number. Defaults to None.
         webdriver_dir (typing.Optional[str]): The webdriver directory. Defaults to None.
         headless_mode (bool): Whether to run in headless mode. Defaults to False.
         mute_audio (bool): Whether to mute audio. Defaults to False.
-
-    :Usage:
-        start_args = EdgeStartArgs(webdriver_dir="/path/to/webdriver", debugging_port=9222, headless_mode=True, mute_audio=True)
     """
 	
 	def __init__(
 			self,
-			webdriver_dir: typing.Optional[str] = None,
+			browser_exe: str = "msedge.exe",
+			profile_dir: typing.Optional[str] = None,
 			debugging_port: typing.Optional[int] = None,
 			headless_mode: bool = False,
 			mute_audio: bool = False,
@@ -113,21 +111,19 @@ class EdgeStartArgs(BrowserStartArgs):
         Initializes EdgeStartArgs.
 
         Args:
-            webdriver_dir (typing.Optional[str]): Directory of the webdriver executable. Defaults to None.
-            debugging_port (typing.Optional[int]): Port for remote debugging. Defaults to None.
-            headless_mode (bool): Run Edge in headless mode. Defaults to False.
-            mute_audio (bool): Mute audio in Edge. Defaults to False.
-
-        :Usage:
-            start_args = EdgeStartArgs(webdriver_dir="/path/to/webdriver", debugging_port=9222)
+        	browser_exe (str): The name of the Yandex Browser executable. Defaults to "msedge.exe".
+        	profile_dir (typing.Optional[str]): Directory for profile storing. Defaults to None.
+        	debugging_port (typing.Optional[int]): Port for remote debugging. Defaults to None.
+        	headless_mode (bool): Run Yandex in headless mode. Defaults to False.
+        	mute_audio (bool): Mute audio in Yandex. Defaults to False.
         """
 		super().__init__(
-				"msedge.exe",
+				browser_exe,
 				"--remote-debugging-port=%d",
 				'--user-data-dir="%s"',
 				"--headless=new",
 				"--mute-audio",
-				webdriver_dir,
+				profile_dir,
 				debugging_port,
 				headless_mode,
 				mute_audio,
@@ -151,20 +147,15 @@ class EdgeWebDriver(BrowserWebDriver):
         webdriver_start_args (EdgeStartArgs): Manages browser start-up arguments.
         webdriver_options_manager (EdgeOptionsManager): Manages browser options.
         debugging_port (typing.Optional[int]): The debugging port number. Defaults to None.
-        webdriver_dir (typing.Optional[str]): The webdriver directory.  Defaults to None.
+        webdriver_dir (typing.Optional[str]): The webdriver directory. Defaults to None.
         headless_mode (bool): Whether to run in headless mode. Defaults to False.
         mute_audio (bool): Whether to mute audio. Defaults to False.
         user_agent (typing.Optional[list[str]]): The user agent. Defaults to None.
-        proxy (typing.Optional[typing.Union[str, list[str]]]) : The proxy server(s). Defaults to None.
-        window_rect (WindowRect):  The browser window rectangle.
-        webdriver_is_active (bool):  Indicates if the webdriver is currently active.
-        webdriver_service (Service | None): The webdriver service. Defaults to None.
-        webdriver_options (Options | None): The webdriver options. Defaults to None.
-
-    :Usage:
-        webdriver = EdgeWebDriver(webdriver_path="/path/to/msedgedriver")
-        webdriver.create_driver()
-        webdriver.driver.get("https://www.example.com")
+        proxy (typing.Optional[typing.Union[str, list[str]]]): The proxy server(s). Defaults to None.
+        window_rect (WindowRect): The browser window rectangle.
+        webdriver_is_active (bool): Indicates if the webdriver is currently active.
+        webdriver_service (typing.Optional[Service]): The webdriver service. Defaults to None.
+        webdriver_options (typing.Optional[Options]): The webdriver options. Defaults to None.
     """
 	
 	def __init__(
@@ -186,9 +177,6 @@ class EdgeWebDriver(BrowserWebDriver):
             implicitly_wait (int): Implicit wait time in seconds. Defaults to 5.
             page_load_timeout (int): Page load timeout in seconds. Defaults to 5.
             window_rect (WindowRect): Window rectangle for setting window position and size. Defaults to WindowRect().
-
-        :Usage:
-            webdriver = EdgeWebDriver(webdriver_path="/path/to/msedgedriver")
         """
 		super().__init__(
 				"msedge.exe",
@@ -274,7 +262,7 @@ class EdgeRemoteWebDriver(EmptyWebDriver):
         Args:
             command_executor (str): The address of the remote webdriver server.
             session_id (str): The session ID of the existing webdriver session.
-            webdriver_options_manager (EdgeOptionsManager):  An instance of EdgeOptionsManager for customizing browser options. Defaults to EdgeOptionsManager().
+            webdriver_options_manager (EdgeOptionsManager): An instance of EdgeOptionsManager for customizing browser options. Defaults to EdgeOptionsManager().
             implicitly_wait (int): The implicit wait timeout in seconds. Defaults to 5.
             page_load_timeout (int): The page load timeout in seconds. Defaults to 5.
 
