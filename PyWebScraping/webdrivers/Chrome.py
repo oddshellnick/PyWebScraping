@@ -135,7 +135,7 @@ class ChromeWebDriver(BrowserWebDriver):
     Controls a Chrome webdriver instance.
 
     Attributes:
-        browser_file_name (str): Path to the browser executable.
+        browser_exe (str): Path to the browser executable.
         bsa_debugging_port_command_line (str): BrowserStartArgs command-line argument for debugging port.
         bsa_webdriver_dir_command_line (str): BrowserStartArgs command-line argument for webdriver directory.
         bsa_headless_mode_command_line (str): BrowserStartArgs command-line argument for headless mode.
@@ -223,6 +223,7 @@ class ChromeWebDriver(BrowserWebDriver):
            webdriver.renew_bas_and_bom()
         """
 		self.webdriver_start_args = ChromeStartArgs(
+				self.browser_exe,
 				self.webdriver_dir,
 				self.debugging_port,
 				self.headless_mode,

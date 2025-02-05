@@ -630,7 +630,7 @@ class BrowserWebDriver(EmptyWebDriver):
     Manages a Selenium webdriver instance, including starting, stopping, and restarting the browser.
 
     Attributes:
-        browser_file_name (str): Path to the browser executable.
+        browser_exe (str): Path to the browser executable.
         bsa_debugging_port_command_line (str): BrowserStartArgs command-line argument for debugging port.
         bsa_webdriver_dir_command_line (str): BrowserStartArgs command-line argument for webdriver directory.
         bsa_headless_mode_command_line (str): BrowserStartArgs command-line argument for headless mode.
@@ -655,7 +655,7 @@ class BrowserWebDriver(EmptyWebDriver):
 	
 	def __init__(
 			self,
-			browser_file_name: str,
+			browser_exe: str,
 			bsa_debugging_port_command_line: str,
 			bsa_webdriver_dir_command_line: str,
 			bsa_headless_mode_command_line: str,
@@ -674,7 +674,7 @@ class BrowserWebDriver(EmptyWebDriver):
         Initializes a new instance of the BrowserWebDriver class.
 
         Args:
-            browser_file_name (str): Path to the browser executable.
+            browser_exe (str): Path to the browser executable.
             bsa_debugging_port_command_line (str): BrowserStartArgs command-line argument for debugging port.
             bsa_webdriver_dir_command_line (str): BrowserStartArgs command-line argument for webdriver directory.
             bsa_headless_mode_command_line (str): BrowserStartArgs command-line argument for headless mode.
@@ -691,7 +691,7 @@ class BrowserWebDriver(EmptyWebDriver):
         """
 		super().__init__(implicitly_wait, page_load_timeout)
 		
-		self.browser_file_name = browser_file_name
+		self.browser_exe = browser_exe
 		self.bsa_debugging_port_command_line = bsa_debugging_port_command_line
 		self.bsa_webdriver_dir_command_line = bsa_webdriver_dir_command_line
 		self.bsa_headless_mode_command_line = bsa_headless_mode_command_line
@@ -705,7 +705,7 @@ class BrowserWebDriver(EmptyWebDriver):
 			self.webdriver_start_args = webdriver_start_args
 		else:
 			self.webdriver_start_args = BrowserStartArgs(
-					self.browser_file_name,
+					self.browser_exe,
 					self.bsa_debugging_port_command_line,
 					self.bsa_webdriver_dir_command_line,
 					self.bsa_headless_mode_command_line,
