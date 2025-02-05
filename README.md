@@ -14,9 +14,15 @@ PyWebScraping simplifies interaction with web browsers for scraping and automati
 
 ## Installation:
 
-```bash
-pip install PyWebScraping
-```
+* **With pip:**
+    ```bash
+    pip install PyWebScraping
+    ```
+
+* **With git:**
+    ```bash
+    pip install git+https://github.com/oddshellnick/PyWebScraping.git
+    ```
 
 ## API Reference:
 
